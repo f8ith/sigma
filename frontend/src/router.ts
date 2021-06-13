@@ -1,97 +1,86 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHashHistory, RouteParams } from 'vue-router'
+import Home from './pages/Home.vue'
 
-import RouterComponent from './components/RouterComponent.vue';
+export type AppRouteNames = 'global-feed'
+| 'my-feed'
+| 'tag'
+| 'article'
+| 'create-article'
+| 'edit-article'
+| 'login'
+| 'register'
+| 'profile'
+| 'profile-favorites'
+| 'settings'
 
-Vue.use(Router);
-
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+export const router = createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
+      name: 'global-feed',
       path: '/',
-      component: () => import(/* webpackChunkName: "start" */ './views/main/Start.vue'),
-      children: [
-        {
-          path: 'login',
-          // route level code-splitting
-          // this generates a separate chunk (about.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "login" */ './views/Login.vue'),
-        },
-        {
-          path: 'recover-password',
-          component: () => import(/* webpackChunkName: "recover-password" */ './views/PasswordRecovery.vue'),
-        },
-        {
-          path: 'reset-password',
-          component: () => import(/* webpackChunkName: "reset-password" */ './views/ResetPassword.vue'),
-        },
-        {
-          path: 'main',
-          component: () => import(/* webpackChunkName: "main" */ './views/main/Main.vue'),
-          children: [
-            {
-              path: 'dashboard',
-              component: () => import(/* webpackChunkName: "main-dashboard" */ './views/main/Dashboard.vue'),
-            },
-            {
-              path: 'profile',
-              component: RouterComponent,
-              redirect: 'profile/view',
-              children: [
-                {
-                  path: 'view',
-                  component: () => import(
-                    /* webpackChunkName: "main-profile" */ './views/main/profile/UserProfile.vue'),
-                },
-                {
-                  path: 'edit',
-                  component: () => import(
-                    /* webpackChunkName: "main-profile-edit" */ './views/main/profile/UserProfileEdit.vue'),
-                },
-                {
-                  path: 'password',
-                  component: () => import(
-                    /* webpackChunkName: "main-profile-password" */ './views/main/profile/UserProfileEditPassword.vue'),
-                },
-              ],
-            },
-            {
-              path: 'admin',
-              component: () => import(/* webpackChunkName: "main-admin" */ './views/main/admin/Admin.vue'),
-              redirect: 'admin/users/all',
-              children: [
-                {
-                  path: 'users',
-                  redirect: 'users/all',
-                },
-                {
-                  path: 'users/all',
-                  component: () => import(
-                    /* webpackChunkName: "main-admin-users" */ './views/main/admin/AdminUsers.vue'),
-                },
-                {
-                  path: 'users/edit/:id',
-                  name: 'main-admin-users-edit',
-                  component: () => import(
-                    /* webpackChunkName: "main-admin-users-edit" */ './views/main/admin/EditUser.vue'),
-                },
-                {
-                  path: 'users/create',
-                  name: 'main-admin-users-create',
-                  component: () => import(
-                    /* webpackChunkName: "main-admin-users-create" */ './views/main/admin/CreateUser.vue'),
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      component: Home,
     },
     {
-      path: '/*', redirect: '/',
+      name: 'my-feed',
+      path: '/my-feeds',
+      component: Home,
+    },
+    {
+      name: 'tag',
+      path: '/tag/:tag',
+      component: Home,
+    },
+    {
+      name: 'article',
+      path: '/article/:slug',
+      component: () => import('./pages/Article.vue'),
+    },
+    {
+      name: 'edit-article',
+      path: '/article/:slug/edit',
+      component: () => import('./pages/EditArticle.vue'),
+    },
+    {
+      name: 'create-article',
+      path: '/article/create',
+      component: () => import('./pages/EditArticle.vue'),
+    },
+    {
+      name: 'login',
+      path: '/login',
+      component: () => import('./pages/Login.vue'),
+    },
+    {
+      name: 'register',
+      path: '/register',
+      component: () => import('./pages/Register.vue'),
+    },
+    {
+      name: 'profile',
+      path: '/profile/:username',
+      component: () => import('./pages/Profile.vue'),
+    },
+    {
+      name: 'profile-favorites',
+      path: '/profile/:username/favorites',
+      component: () => import('./pages/Profile.vue'),
+    },
+    {
+      name: 'settings',
+      path: '/settings',
+      component: () => import('./pages/Settings.vue'),
     },
   ],
-});
+})
+
+export function routerPush (name: AppRouteNames, params?: RouteParams): ReturnType<typeof router.push> {
+  if (params !== undefined) {
+    return router.push({
+      name,
+      params,
+    })
+  } else {
+    return router.push({ name })
+  }
+}

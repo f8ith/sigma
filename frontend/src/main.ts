@@ -1,19 +1,22 @@
-import '@babel/polyfill';
-// Import Component hooks before component definitions
-import './component-hooks';
-import Vue from 'vue';
-import './plugins/vuetify';
-import './plugins/vee-validate';
-import App from './App.vue';
-import router from './router';
-import store from '@/store';
-import './registerServiceWorker';
-import 'vuetify/dist/vuetify.min.css';
+import { createApp } from 'vue'
+import App from './App.vue'
 
-Vue.config.productionTip = false;
+import Harlem from '@harlem/core'
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount('#app');
+import { router } from './router'
+
+import registerGlobalComponents from './plugins/global-components'
+import setAuthorizationToken from './plugins/set-authorization-token'
+
+import 'feather-icons'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+
+const app = createApp(App)
+app.use(router)
+app.use(Harlem)
+
+setAuthorizationToken()
+registerGlobalComponents(app)
+
+app.mount('#app')
