@@ -12,6 +12,9 @@ export type AppRouteNames = 'global-feed'
 | 'profile'
 | 'profile-favorites'
 | 'settings'
+  'events'
+  'event'
+  'submit-score'
 
 export const router = createRouter({
   history: createWebHashHistory(),
@@ -71,6 +74,26 @@ export const router = createRouter({
       path: '/settings',
       component: () => import('./pages/Settings.vue'),
     },
+    {
+      name: 'events',
+      path: '/events',
+      component: () => import('./pages/EventsList.vue'),
+    },
+    {
+      name: 'event',
+      path: '/event/:id',
+      component: () => import('./pages/EventDetail.vue'),
+    },
+    {
+      name: 'edit-score',  
+      path: '/event/:id/edit',
+      component: () => import('./pages/EditScore.vue'),
+    },
+    {
+      name: 'submit-score',  
+      path: '/event/:id/submit',
+      component: () => import('./pages/EditScore.vue'),
+    }
   ],
 })
 

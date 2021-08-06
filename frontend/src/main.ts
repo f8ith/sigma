@@ -11,6 +11,7 @@ import setAuthorizationToken from './plugins/set-authorization-token'
 import 'feather-icons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const app = createApp(App)
 app.use(router)
