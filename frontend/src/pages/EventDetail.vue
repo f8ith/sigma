@@ -124,7 +124,7 @@ export default defineComponent({
         participants: [
           {
             name: "John Apple",
-            id: "s171001",
+            id: "S171001",
             gender: "M",
             house: "Suuyki",
             lane: 1,
@@ -133,7 +133,7 @@ export default defineComponent({
           },
           {
             name: "Chris Brook",
-            id: "s171086",
+            id: "S171086",
             gender: "M",
             house: "Copland",
             lane: 2,
@@ -141,10 +141,11 @@ export default defineComponent({
           },
           {
             name: "Tim Cook",
-            id: "s171003",
+            id: "S171003",
             gender: "M",
             house: "Laozi",
             lane: 6,
+            status: "exempt",
             time: ""
           }
         ]
@@ -174,16 +175,17 @@ export default defineComponent({
         completed: false
       }
     ];
-    let eventData = eventsData.find((elements) => elements.id === id);
-    if (eventData.completed) {
-      eventData.participants.sort((a, b) => a.rank - b.rank);
+    let eventData = ref(eventsData.find((elements) => elements.id === id));
+    if (eventData.value.completed) {
+      eventData.value.participants.sort((a, b) => a.rank - b.rank);
     }
     var scanning = ref(false);
     function setPresent(participantId) {
       console.log(participantId);
-      const participant = eventData.participants.find(
+      const participant = eventData.value.participants.find(
         (element) => element.id === participantId
       );
+      console.log(participant);
       if (participant != undefined) {
         participant.status = "present";
       }

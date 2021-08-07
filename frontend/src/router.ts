@@ -98,6 +98,11 @@ export const router = createRouter({
       name: 'sick-leave',
       path: '/sickleave',
       component: () => import('./pages/SickLeave.vue')
+    },
+    {
+      name: 'event-completed',
+      path: '/event/:id/completed',
+      component: () => import('./pages/EventDetailCompleted.vue')
     }
   ],
 })
