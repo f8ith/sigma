@@ -1,6 +1,10 @@
 declare interface UserResponse {
   user: User
 }
+declare interface StudentResponse {
+  student: Student
+}
+
 
 declare interface TagsResponse {
   tags: string[]
@@ -14,6 +18,9 @@ declare interface ArticleResponse {
   article: Article
 }
 
+declare interface EventResponse {
+  event: Event
+}
 declare interface ArticlesResponse {
   articles: Article[]
   articlesCount: number

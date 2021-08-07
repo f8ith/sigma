@@ -49,7 +49,8 @@ body {
           <td v-for="property in participantProperties" :key="property">
             {{ participant[property] }}
           </td>
-          <td contenteditable="true">{{ participant[rankProperty] }}</td>
+          <!--           <td contenteditable="true">{{ participant[rankProperty] }}</td> -->
+          <td><input type="text" v-model="participant[rankProperty]" /></td>
         </tr>
       </tbody>
     </table>
@@ -80,7 +81,7 @@ export default defineComponent({
         name: "100m Sprint",
         gender: "Men",
         group: "Grade A",
-        type: "Heat",
+        stage: "Heat",
         completed: false,
         participants: [
           {
@@ -89,7 +90,7 @@ export default defineComponent({
             gender: "M",
             house: "Suuyki",
             lane: 1,
-            time: "",
+            time: ""
           },
           {
             name: "Chris Brook",
@@ -97,7 +98,7 @@ export default defineComponent({
             gender: "M",
             house: "Copland",
             lane: 2,
-            time: "",
+            time: ""
           },
           {
             name: "Tim Cook",
@@ -105,41 +106,42 @@ export default defineComponent({
             gender: "M",
             house: "Laozi",
             lane: 6,
-            time: "",
-          },
-        ],
+            time: ""
+          }
+        ]
       },
       {
         id: 2,
         name: "100m Sprint",
         gender: "Men",
         group: "Grade A",
-        type: "Finals",
-        completed: true,
+        stage: "Finals",
+        completed: true
       },
       {
         id: 3,
         name: "100m Sprint",
         gender: "Women",
         group: "Grade A",
-        type: "Heat",
-        completed: true,
+        stage: "Heat",
+        completed: true
       },
       {
         id: 4,
         name: "100m Sprint",
         gender: "Women",
         group: "Grade A",
-        type: "Finals",
-        completed: false,
-      },
+        stage: "Finals",
+        completed: false
+      }
     ];
     let eventData = eventsData.find((elements) => elements.id === id);
+    const submit = () => {};
     return {
       participantProperties,
       rankProperty,
-      eventData,
+      eventData
     };
-  },
+  }
 });
 </script>

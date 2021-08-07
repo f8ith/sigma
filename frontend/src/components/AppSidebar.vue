@@ -140,12 +140,15 @@
               text-muted
             "
           >
-            <span>Admin</span>
-            <a class="link-secondary" href="#" aria-label="Add a new report">
-              <span data-feather="plus-circle" />
-            </a>
+            <span>Student</span>
           </h6>
-          <ul class="nav flex-column mb-2"></ul>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <AppLink class="nav-link" active-class="active" name="sick-leave">
+                <i class="bi bi-journal-medical" /> Sick leave
+              </AppLink>
+            </li>
+          </ul>
         </div>
         <div class="fixed-bottom m-3">
           <AppLink
@@ -189,6 +192,7 @@ export default defineComponent({
         name: "global-feed",
         title: "Dashboard",
         display: "all",
+        icon: "bi bi-house",
       },
       {
         name: "events",

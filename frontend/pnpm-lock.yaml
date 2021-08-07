@@ -42,6 +42,7 @@ specifiers:
   vue-quaggajs: ^1.0.12
   vue-router: ^4.0.6
   vue-tsc: ^0.0.25
+  vue-upload-drop-images: ^1.0.7
 
 dependencies:
   '@ericblade/quagga2': 1.4.1
@@ -58,6 +59,7 @@ dependencies:
   vue: 3.1.1
   vue-quaggajs: 1.0.12_vue@3.1.1
   vue-router: 4.0.8_vue@3.1.1
+  vue-upload-drop-images: 1.0.7
 
 devDependencies:
   '@babel/core': 7.14.5
@@ -6256,6 +6258,10 @@ packages:
     dependencies:
       unzipper: 0.10.11
     dev: true
+
+  /vue-upload-drop-images/1.0.7:
+    resolution: {integrity: sha512-O1G+iy0oTK9EaD6XHI5vjZQzdy+PeVCui7ty5Ja8ipw3bBWcY1o5+7JxofMZSXPQbr++Go0hWHtyb7xwQZOpQA==}
+    dev: false
 
   /vue/3.1.1:
     resolution: {integrity: sha512-j9fj3PNPMxo2eqOKYjMuss9XBS8ZtmczLY3kPvjcp9d3DbhyNqLYbaMQH18+1pDIzzVvQCQBvIf774LsjjqSKA==}

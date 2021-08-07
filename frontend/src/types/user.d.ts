@@ -13,3 +13,14 @@ declare interface User {
   image: string | undefined
   token: string
 }
+declare interface Student {
+  id: number
+  class: string
+  classNumber: number
+  name: string
+  bio: string | undefined
+  image: string | undefined
+  exempt: boolean
+  power: boolean
+  token: string
+}
