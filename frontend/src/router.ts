@@ -93,6 +93,11 @@ export const router = createRouter({
       name: 'submit-score',  
       path: '/event/:id/submit',
       component: () => import('./pages/EditScore.vue'),
+    },
+    {
+      name: 'sick-leave',
+      path: '/sickleave',
+      component: () => import('./pages/SickLeave.vue')
     }
   ],
 })

@@ -43,7 +43,7 @@ import Quagga from "@ericblade/quagga2";
 export default {
   data() {
     return {
-      code: [],
+      code: []
     };
   },
   methods: {
@@ -63,13 +63,13 @@ export default {
               top: "35%",
               right: "10%",
               left: "10%",
-              bottom: "35%",
-            },
+              bottom: "35%"
+            }
           },
           locate: false,
           decoder: {
-            readers: ["code_39_reader"],
-          },
+            readers: ["code_39_reader"]
+          }
         },
         (err) => {
           if (err) {
@@ -120,14 +120,14 @@ export default {
               .forEach(function (box) {
                 Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                   color: "#00F",
-                  lineWidth: 2,
+                  lineWidth: 2
                 });
               });
           }
           if (result.box) {
             Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
               color: "#008",
-              lineWidth: 2,
+              lineWidth: 2
             });
           }
 
@@ -145,9 +145,10 @@ export default {
     },
     onDetected(data) {
       let barCodeData = data.codeResult.code;
-      console.log(barCodeData);
-    },
+      this.$emit("barcodeDetected", barCodeData);
+    }
   },
+  emits: ["barcodeDetected"],
   async mounted() {
     let data = await this.checkDevice();
     if (data) {
@@ -156,6 +157,6 @@ export default {
   },
   beforeUnmount() {
     Quagga.stop();
-  },
+  }
 };
 </script>

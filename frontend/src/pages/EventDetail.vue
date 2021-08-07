@@ -44,6 +44,7 @@ body {
         <tr
           v-for="participant in eventData.participants"
           :key="participant.lane"
+          :class="attendanceClasses[participant.status]"
         >
           <th scope="row">{{ participant.rank }}</th>
           <td v-for="property in participantProperties" :key="property">
@@ -80,13 +81,14 @@ body {
       v-if="scanning"
       class="mt-3"
       ref="barcodeScanner"
+      @barcodeDetected="setPresent($event)"
     ></BarcodeTestBad>
     <!--button type="button" class="mx-2 btn btn-primary"><i class="ion-gear-a"/> Edit Settings</button-->
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 import BarcodeTestBad from "../components/BarcodeTestBad.vue";
 
@@ -103,9 +105,14 @@ export default defineComponent({
       "classNumber",
       "name",
       "gender",
-      "house",
+      "house"
     ];
     const rankProperty = "time";
+    const attendanceClasses = ref({
+      present: "table-success",
+      absent: "table-danger",
+      exempt: "table-secondary"
+    });
     const eventsData = [
       {
         id: 1,
@@ -113,7 +120,7 @@ export default defineComponent({
         gender: "Men",
         group: "Grade A",
         type: "Heat",
-        completed: false,
+        completed: true,
         participants: [
           {
             name: "John Apple",
@@ -122,14 +129,15 @@ export default defineComponent({
             house: "Suuyki",
             lane: 1,
             time: "",
+            status: "present"
           },
           {
             name: "Chris Brook",
-            id: "s171002",
+            id: "s171086",
             gender: "M",
             house: "Copland",
             lane: 2,
-            time: "",
+            time: ""
           },
           {
             name: "Tim Cook",
@@ -137,9 +145,9 @@ export default defineComponent({
             gender: "M",
             house: "Laozi",
             lane: 6,
-            time: "",
-          },
-        ],
+            time: ""
+          }
+        ]
       },
       {
         id: 2,
@@ -147,7 +155,7 @@ export default defineComponent({
         gender: "Men",
         group: "Grade A",
         type: "Finals",
-        completed: true,
+        completed: true
       },
       {
         id: 3,
@@ -155,7 +163,7 @@ export default defineComponent({
         gender: "Women",
         group: "Grade A",
         type: "Heat",
-        completed: true,
+        completed: true
       },
       {
         id: 4,
@@ -163,24 +171,35 @@ export default defineComponent({
         gender: "Women",
         group: "Grade A",
         type: "Finals",
-        completed: false,
-      },
+        completed: false
+      }
     ];
     let eventData = eventsData.find((elements) => elements.id === id);
     if (eventData.completed) {
       eventData.participants.sort((a, b) => a.rank - b.rank);
     }
-    var scanning = false;
+    var scanning = ref(false);
+    function setPresent(participantId) {
+      console.log(participantId);
+      const participant = eventData.participants.find(
+        (element) => element.id === participantId
+      );
+      if (participant != undefined) {
+        participant.status = "present";
+      }
+    }
     return {
       participantProperties,
       rankProperty,
       eventData,
       scanning,
+      attendanceClasses,
       toggleScanning() {
-        scanning = !scanning;
+        scanning.value = !scanning.value;
         console.log(scanning);
       },
+      setPresent
     };
-  },
+  }
 });
 </script>
