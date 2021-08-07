@@ -1,3 +1,5 @@
 .vscode
 .mypy_cache
 docker-stack.yml
+frontend/fullchain.pem
+frontend/privkey.pem
